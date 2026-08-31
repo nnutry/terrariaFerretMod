@@ -1,0 +1,3 @@
+displayName = Ferret Mod
+author = Nutry
+version = 0.1
