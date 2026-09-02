@@ -5,12 +5,12 @@
 
 	<!-- General -->
 	<PropertyGroup>
-		
+	  <OutputType>Library</OutputType>
 	</PropertyGroup>
 
 	<!-- References -->
 	<ItemGroup>
-		
+	  <Folder Include="Content\Items\" />
 	</ItemGroup>
 
 </Project>
