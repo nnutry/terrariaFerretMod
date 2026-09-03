@@ -20,6 +20,11 @@ Items: {
 		DisplayName: Ferret Sword
 		Tooltip: ""
 	}
+
+	FerretGun: {
+		DisplayName: Ferret Gun
+		Tooltip: ""
+	}
 }
 
 Projectiles.LilyPetProjectile.DisplayName: Lily Pet Projectile
