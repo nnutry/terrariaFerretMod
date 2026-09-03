@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FerretMod")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d41357723769b67fdf5decfa62813037a072763")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4922c7b347724a0f7937e9de36896433ede6492e")]
 [assembly: System.Reflection.AssemblyProductAttribute("FerretMod")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FerretMod")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

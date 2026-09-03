@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Microsoft.Xna.Framework;
 
 namespace FerretMod.Content.Items.Weapons // Where is your code locates
 {
@@ -44,6 +45,29 @@ namespace FerretMod.Content.Items.Weapons // Where is your code locates
             recipe.AddIngredient(ItemID.Wood, 3); // Also, we are using vanilla material to craft, 3 Wood
             recipe.AddTile(TileID.WorkBenches); // Crafting station we need for craft, WorkBenches, Anvils etc. You can find them here - https://terraria.wiki.gg/wiki/Tile_IDs
             recipe.Register();
+        }
+
+        public override void MeleeEffects(Player player, Rectangle hitbox)
+        {
+            if (Main.rand.NextBool(3)) // With 1/3 chance per tick (60 ticks = 1 second)...
+            {
+                // ...spawning dust
+                Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), // Position to spawn
+                (int)(hitbox.Width * 1.2f), (int)(hitbox.Height * 1.2), // Width and Height
+                DustID.Poisoned, // Dust type. Check https://terraria.wiki.gg/wiki/Dust_IDs
+                0, 0, // Speed X and Speed Y of dust, it have some randomization
+                125); // Dust transparency, 0 - full visibility, 255 - full transparency
+
+            }
+        }
+
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (Main.rand.NextBool(4)) // 1/4 chance, or 25% in other words
+            {
+                target.AddBuff(BuffID.Poisoned, // Adding Poisoned to target
+                    300); // for 5 seconds (60 ticks = 1 second)
+            }
         }
     }
 }
