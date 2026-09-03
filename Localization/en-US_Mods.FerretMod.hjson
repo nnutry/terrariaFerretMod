@@ -15,6 +15,11 @@ Items: {
 		DisplayName: Ferret Eye
 		Tooltip: ""
 	}
+
+	FerretSword: {
+		DisplayName: Ferret Sword
+		Tooltip: ""
+	}
 }
 
 Projectiles.LilyPetProjectile.DisplayName: Lily Pet Projectile
