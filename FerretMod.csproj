@@ -7,9 +7,6 @@
 	<PropertyGroup>
 	  <OutputType>Library</OutputType>
 	</PropertyGroup>
-	<ItemGroup>
-	  <Folder Include="Content\Items\Weapons\" />
-	</ItemGroup>
 
 	<!-- References -->
 
