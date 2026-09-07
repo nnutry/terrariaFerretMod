@@ -1,10 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using FerretMod.Content.Items.Materials;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using FerretMod.Content.Projectiles;
+using FerretMod.Content.Items.Ammo;
 
 namespace FerretMod.Content.Items.Weapons
 {
@@ -23,20 +22,20 @@ namespace FerretMod.Content.Items.Weapons
             // Combat properties
             Item.damage = 0; // Gun damage + bullet damage = final damage
             Item.DamageType = DamageClass.Ranged;
-            Item.useTime = 5; // Delay between shots.
-            Item.useAnimation = 5; // How long shoot animation lasts in ticks.
+            Item.useTime = 20; // Delay between shots.
+            Item.useAnimation = 20; // How long shoot animation lasts in ticks.
             Item.knockBack = 1f; // Gun knockback + bullet knockback = final knockback
             Item.autoReuse = true;
 
             // Other properties
             Item.value = 100000;
-            Item.UseSound = SoundID.Item11; // Gun use sound
+            Item.UseSound = SoundID.Item85; // Gun use sound
 
             // Gun properties
             Item.noMelee = true;
             Item.shoot = ProjectileID.PurificationPowder; // What kind of projectile the gun fires, does not mean anything here because it is replaced by ammo
             Item.shootSpeed = 1f; // Speed of a projectile. 
-            Item.useAmmo = AmmoID.Bullet; // What ammo gun uses
+            Item.useAmmo = ModContent.ItemType<FerretSpit>(); // What ammo gun uses
         }
         public override void AddRecipes()
         {
@@ -47,5 +46,11 @@ namespace FerretMod.Content.Items.Weapons
         }
 
         public override Vector2? HoldoutOffset() => new Vector2(-8f, -4f); // Offset in pixels at which the player will hold the gun. -Y is up
+        public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+        {
+            // Умножение на 40f смещает точку появления снарядка вперед на 40 пикселей.
+            position += Vector2.Normalize(velocity) * 40f;
+        }
+
     }
 }

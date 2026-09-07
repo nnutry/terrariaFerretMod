@@ -24,10 +24,10 @@ namespace FerretMod.Content.Items.Ammo
             Item.consumable = true; // This marks the item as consumable, making it automatically be consumed when it's used as ammunition, or something else, if possible.
             Item.knockBack = 0f;
             Item.value = 10;
-            Item.rare = ItemRarityID.Green;
+            Item.rare = ItemRarityID.Blue;
             Item.shoot = ModContent.ProjectileType<Projectiles.FerretSpit>(); // The projectile that weapons fire when using this item as ammunition.
-            Item.shootSpeed = 4.5f; // The speed of the projectile. This value equivalent to Silver Bullet since ExampleBullet's Projectile.extraUpdates is 1.
-            Item.ammo = AmmoID.Bullet; // The ammo class this ammo belongs to.
+            Item.shootSpeed = 3f; // The speed of the projectile. This value equivalent to Silver Bullet since ExampleBullet's Projectile.extraUpdates is 1.
+            Item.ammo = Item.type; // The ammo class this ammo belongs to.
         }
     }
 }
