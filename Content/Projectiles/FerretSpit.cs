@@ -12,7 +12,7 @@ namespace FerretMod.Content.Projectiles
     // PROJECTILE
     public class FerretSpit : ModProjectile
     {
-        // My Stuff
+        // My vars
         public int freeFly = 50;
 
         public override void SetStaticDefaults()
@@ -32,7 +32,7 @@ namespace FerretMod.Content.Projectiles
             // Combat properties
             Projectile.DamageType = DamageClass.Ranged; // Is the projectile shoot by a ranged weapon?
             Projectile.penetrate = 1; // How many monsters the projectile can penetrate. (OnTileCollide below also decrements penetrate for bounces as well)
-            Projectile.timeLeft = 600; // The live time for the projectile (60 = 1 second, so 600 is 10 seconds)
+            Projectile.timeLeft = 600; // The live time for the projectile (60 = 1 second)
 
             // Other properties
             Projectile.aiStyle = ProjAIStyleID.Arrow; // The ai style of the projectile, please reference the source code of Terraria
@@ -47,7 +47,6 @@ namespace FerretMod.Content.Projectiles
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             // If collide with tile, reduce the penetrate.
-            // So the projectile can reflect at most 5 times
             Projectile.penetrate--;
             if (Projectile.penetrate <= 0)
             {
@@ -70,7 +69,6 @@ namespace FerretMod.Content.Projectiles
                     Projectile.velocity.Y = -oldVelocity.Y;
                 }
             }
-
             return false;
         }
 
@@ -87,7 +85,6 @@ namespace FerretMod.Content.Projectiles
                 Color color = Projectile.GetAlpha(lightColor) * ((Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
                 Main.EntitySpriteDraw(texture, drawPos, null, color, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0);
             }
-
             return true;
         }
 
@@ -103,16 +100,15 @@ namespace FerretMod.Content.Projectiles
                 Dust dust = Dust.NewDustPerfect(
                     Projectile.Center,      // Точка появления (центр снаряда)
                     DustID.Water,           // Тип частиц
-                    speed,                  // Скорость и направление полета частицы
-                    0,                      // Альфа-канал (прозрачность)
-                    default,                // Кастомный цвет (оставляем дефолтный)
+                    speed,                  // Скорость и направление полета частицы (вектор)
+                    0,                      // Альфа-канал
+                    default,                // Кастомный цвет
                     Main.rand.NextFloat(0.5f, 1.5f) // Случайный размер капель
                 );
                 // Дополнительные свойства для физики капель
                 dust.noGravity = false;
                 dust.fadeIn = 0.5f;
             }
-            
             SoundEngine.PlaySound(SoundID.Item54, Projectile.position);
         }
 
@@ -129,7 +125,7 @@ namespace FerretMod.Content.Projectiles
             {
                 Projectile.velocity.Y += 0.04f;
             }
-
+            // Ограничение максимальной скорости падения
             if (Projectile.velocity.Y > 6f)
             {
                 Projectile.velocity.Y = 6f;
