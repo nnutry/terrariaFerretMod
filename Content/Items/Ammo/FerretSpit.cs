@@ -7,6 +7,7 @@ using FerretMod.Content.Projectiles;
 
 namespace FerretMod.Content.Items.Ammo
 {
+    // ITEM
     public class FerretSpit : ModItem
     {
         public override void SetStaticDefaults()
@@ -18,8 +19,8 @@ namespace FerretMod.Content.Items.Ammo
         {
             Item.damage = 5; // The damage for projectiles isn't actually 12, it actually is the damage combined with the projectile and the item together.
             Item.DamageType = DamageClass.Ranged;
-            Item.width = 10;
-            Item.height = 10;
+            Item.width = 14;
+            Item.height = 14;
             Item.maxStack = Item.CommonMaxStack;
             Item.consumable = true; // This marks the item as consumable, making it automatically be consumed when it's used as ammunition, or something else, if possible.
             Item.knockBack = 0f;

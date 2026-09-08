@@ -24,9 +24,9 @@ namespace FerretMod.Content.Projectiles
         public override void SetDefaults()
         {
             // Visual properties
-            Projectile.width = 10; // The width of projectile hitbox
-            Projectile.height = 10; // The height of projectile hitbox
-            Projectile.alpha = 255; // The transparency of the projectile, 255 for completely transparent. (aiStyle 1 quickly fades the projectile in) Make sure to delete this if you aren't using an aiStyle that fades in. You'll wonder why your projectile is invisible.
+            Projectile.width = 12; // The width of projectile hitbox
+            Projectile.height = 12; // The height of projectile hitbox
+            Projectile.alpha = 200; // The transparency of the projectile, 255 for completely transparent. (aiStyle 1 quickly fades the projectile in) Make sure to delete this if you aren't using an aiStyle that fades in. You'll wonder why your projectile is invisible.
             Projectile.light = 0f; // How much light emit around the projectile
 
             // Combat properties
@@ -94,7 +94,25 @@ namespace FerretMod.Content.Projectiles
         public override void OnKill(int timeLeft)
         {
             // This code and the similar code above in OnTileCollide spawn dust from the tiles collided with. SoundID.Item10 is the bounce sound you hear.
-            Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
+            //Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
+            for (int i=0; i < 15; i++)
+            {
+                Vector2 speed = Main.rand.NextVector2Unit() * Main.rand.NextFloat(1f, 4f);
+                speed.Y += 0.7f;
+
+                Dust dust = Dust.NewDustPerfect(
+                    Projectile.Center,      // Точка появления (центр снаряда)
+                    DustID.Water,           // Тип частиц
+                    speed,                  // Скорость и направление полета частицы
+                    0,                      // Альфа-канал (прозрачность)
+                    default,                // Кастомный цвет (оставляем дефолтный)
+                    Main.rand.NextFloat(0.5f, 1.5f) // Случайный размер капель
+                );
+                // Дополнительные свойства для физики капель
+                dust.noGravity = false;
+                dust.fadeIn = 0.5f;
+            }
+            
             SoundEngine.PlaySound(SoundID.Item54, Projectile.position);
         }
 

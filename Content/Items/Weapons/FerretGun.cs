@@ -15,7 +15,7 @@ namespace FerretMod.Content.Items.Weapons
             Item.width = 70;
             Item.height = 30;
             Item.scale = 1f;
-            Item.useStyle = ItemUseStyleID.Shoot; // Use style for guns
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.rare = ItemRarityID.Blue;
 
 
@@ -29,12 +29,12 @@ namespace FerretMod.Content.Items.Weapons
 
             // Other properties
             Item.value = 100000;
-            Item.UseSound = SoundID.Item85; // Gun use sound
+            Item.UseSound = SoundID.Item85;
 
             // Gun properties
             Item.noMelee = true;
-            Item.shoot = ProjectileID.PurificationPowder; // What kind of projectile the gun fires, does not mean anything here because it is replaced by ammo
-            Item.shootSpeed = 1f; // Speed of a projectile. 
+            Item.shoot = ProjectileID.PurificationPowder; // does not mean anything here because it is replaced by ammo
+            Item.shootSpeed = 1f; // Speed of a projectile
             Item.useAmmo = ModContent.ItemType<FerretSpit>(); // What ammo gun uses
         }
         public override void AddRecipes()
