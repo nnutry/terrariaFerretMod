@@ -1,0 +1,6 @@
+.vs/
+.vscode/
+FerretMod.slnx
+bin/
+obj/
+*.lnk
