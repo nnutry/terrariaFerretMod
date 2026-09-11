@@ -14,6 +14,7 @@ namespace FerretMod.Content.Projectiles
     {
         // My vars
         public int freeFly = 50;
+        private int dustTimer = 0; // для брызгов в полете
 
         public override void SetStaticDefaults()
         {
@@ -114,6 +115,28 @@ namespace FerretMod.Content.Projectiles
 
         public override void AI()
         {
+            // появление брызга в полете
+            dustTimer++;
+            if (dustTimer % 5 == 0)
+            {
+                // эффект плевочка, dust
+                Vector2 speed = Main.rand.NextVector2Unit() * Main.rand.NextFloat(1f, 4f);
+                speed.Y += 1f;
+
+                Dust dust = Dust.NewDustPerfect(
+                    Projectile.Center,      // Точка появления (центр снаряда)
+                    DustID.Water,           // Тип частиц
+                    speed,                  // Скорость и направление полета частицы (вектор)
+                    0,                      // Альфа-канал
+                    default,                // Кастомный цвет
+                    Main.rand.NextFloat(0.5f, 1.5f) // Случайный размер капель
+                );
+                // Дополнительные свойства для физики капель
+                dust.noGravity = false;
+                dust.fadeIn = 0.5f;
+            }
+            //------------------------------------------------------
+
             // небольшой штраф пока freeFly есть, потом большой
             if (freeFly > 0)
             {
