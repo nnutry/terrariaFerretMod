@@ -1,14 +1,19 @@
 ﻿using FerretMod.Content.Items.Materials; // Using our Materials folder
+using FerretMod.Content.Projectiles;
+using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
 
 namespace FerretMod.Content.Items.Weapons // Where is your code locates
 {
     public class FerretSword : ModItem
     {
+        // My vars
+        int shootCount = 2;
+
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1; // How many items need for research in Journey Mode
@@ -28,13 +33,30 @@ namespace FerretMod.Content.Items.Weapons // Where is your code locates
             // useTime and useAnimation often use the same value, but we'll see examples where they don't use the same values
             Item.useTime = 30; // How long the swing lasts in ticks (60 ticks = 1 second)
             Item.useAnimation = 30; // How long the swing animation lasts in ticks (60 ticks = 1 second)
-            Item.knockBack = 15f; // How far the sword punches enemies, 20 is maximal value
+            Item.knockBack = 10f; // How far the sword punches enemies, 20 is maximal value
             Item.autoReuse = true; // Can the item auto swing by holding the attack button
+            // Shooting
+            Item.shoot = ModContent.ProjectileType<FerretSpit>();
+            Item.shootSpeed = 4f;
+
 
             // Other properties
-            Item.value = 12000; // Item sell price in copper coins
+            Item.value = Item.buyPrice(gold: 1); // Item sell price in copper coins
             Item.useStyle = ItemUseStyleID.Swing; // This is how you're holding the weapon, visit https://terraria.wiki.gg/wiki/Use_Style_IDs for list of possible use styles
-            Item.UseSound = SoundID.Item3; // What sound is played when using the item, all sounds can be found here - https://terraria.wiki.gg/wiki/Sound_IDs
+            Item.UseSound = SoundID.Item85; // What sound is played when using the item, all sounds can be found here - https://terraria.wiki.gg/wiki/Sound_IDs
+        }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            shootCount++;
+
+            if (shootCount % 3 == 0)
+            {
+                shootCount = 0;
+                return true;
+            }
+            
+            return false;
         }
 
         // Creating item craft
