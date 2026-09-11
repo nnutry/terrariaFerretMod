@@ -4,3 +4,5 @@ FerretMod.slnx
 bin/
 obj/
 *.lnk
+Content/Pets/LilyPet/LilyPetProjectile2.png
+Content/Pets/LilyPet/LilyPetProjectile3.png
